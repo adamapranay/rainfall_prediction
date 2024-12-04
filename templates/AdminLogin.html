@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        form, label {
+            text-align: unset;
+        }
+
+
+    </style>
+
+
+    <div class="container mt-5 mb-5 col-md-6">
+        <div class="card">
+
+            <form action="{% url 'AdminLoginCheck' %}" method="post">
+                <fieldset>
+                    <legend class="py-2 text-center">Admin Login</legend>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label" for="id_loginid">LoginId:</label>
+                        <input type="text" class="form-control" id="id_loginid" name="loginid">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="id_password">Password:</label>
+                        <input type="password" class="form-control" id="id_password" name="password">
+                    </div>
+
+                    <div class="d-grid gap-2 mb-5">
+                        <input type="submit" class="button-1" value="Submit">
+                        <input type="reset" class="button-2" value="Reset">
+                    </div>
+                </fieldset>
+                {% if messages %}
+                    Message:
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+

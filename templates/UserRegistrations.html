@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        form, label {
+            text-align: unset;
+        }
+    </style>
+
+    <div class="container mb-5 mt-5 col-md-6">
+        <div class="card">
+
+            <form action="{% url 'UserRegisterActions' %}" method="POST">
+                {% csrf_token %}
+                <legend class="text-center mt-3">Sign Up</legend>
+                {{ form.as_p }}
+                <p>
+                    <input type="submit" class="button-1" value="Register">
+                    <input type="reset" class="button-2" value="Reset">
+                </p>
+
+                {% if messages %}
+                    Message:
+                    <ul class="messages ">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
